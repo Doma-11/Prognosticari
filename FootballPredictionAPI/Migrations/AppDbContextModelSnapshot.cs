@@ -293,6 +293,9 @@ namespace FootballPredictionAPI.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
+                    b.HasIndex("GoogleId")
+                        .IsUnique();
+
                     b.ToTable("Users");
                 });
 
