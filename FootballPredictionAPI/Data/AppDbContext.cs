@@ -131,12 +131,18 @@ namespace FootballPredictionAPI.Data
             modelBuilder.Entity<Season>()
                 .HasIndex(s => new { s.LeagueId, s.Name })
                 .IsUnique();
+
+
+            //google
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.GoogleId)
+                .IsUnique();
         }
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Tournament> Tournaments { get; set; } = null!;
         public DbSet<TournamentParticipant> TournamentParticipants { get; set; } = null!;
         public DbSet<League> Leagues { get; set; } = null!;
-       public DbSet<Team> Teams { get; set; } = null!;
+        public DbSet<Team> Teams { get; set; } = null!;
         public DbSet<Season> Seasons { get; set; } = null!;
         public DbSet<Match> Matches { get; set; } = null!;
         public DbSet<Prediction> Predictions { get; set; } = null!;
