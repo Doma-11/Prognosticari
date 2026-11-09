@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using FootballPredictionAPI.Models;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+
 
 
 namespace FootballPredictionAPI.Data
