@@ -35,11 +35,23 @@ namespace FootballPredictionAPI.Middleware
         {
             int statusCode = exception switch
             {
-                UnauthorizedAccessException =>
-                    StatusCodes.Status401Unauthorized,
+                ArgumentException =>
+                    StatusCodes.Status400BadRequest,
+
+                KeyNotFoundException =>
+                    StatusCodes.Status404NotFound,
+
+                ForbiddenException =>
+                    StatusCodes.Status403Forbidden,
 
                 ConflictException =>
                     StatusCodes.Status409Conflict,
+
+                InvalidOperationException =>
+                    StatusCodes.Status409Conflict,
+
+                UnauthorizedAccessException =>
+                    StatusCodes.Status401Unauthorized,
 
                 _ => StatusCodes.Status500InternalServerError
             };
@@ -65,7 +77,10 @@ namespace FootballPredictionAPI.Middleware
                 Status = statusCode,
                 Title = statusCode switch
                 {
+                    400 => "Bad Request",
                     401 => "Unauthorized",
+                    403 => "Forbidden",
+                    404 => "Not Found",
                     409 => "Conflict",
                     _ => "Internal Server Error"
                 },

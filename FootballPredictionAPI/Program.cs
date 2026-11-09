@@ -24,6 +24,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+//TOURNAMENT SERVICE
+builder.Services.AddScoped<ITournamentService, TournamentService>();
+
 //PASSWORD HASHER SERVICE REGISTRATION
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
