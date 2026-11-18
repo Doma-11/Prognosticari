@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using FootballPredictionAPI.Middleware;
+using FootballPredictionAPI.BackgroundServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,8 @@ builder.Services.AddScoped<ITournamentService, TournamentService>();
 
 //PASSWORD HASHER SERVICE REGISTRATION
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
+
 
 //JWT TOKEN REGISTRATION
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
@@ -113,6 +116,30 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+
+
+// API REGISTRATION 
+builder.Services.AddScoped<FootballApiService>();
+
+builder.Services.AddHttpClient("FootballData", (serviceProvider, client) =>
+{
+    var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+
+    var apiKey = configuration["FootballApi:ApiKey"];
+
+    client.BaseAddress = new Uri("https://api.football-data.org/v4/");
+
+    client.DefaultRequestHeaders.Add("X-Auth-Token", apiKey);
+
+    client.Timeout = TimeSpan.FromSeconds(30);
+});
+
+//FOOTBALL SYNC SERVICE- it syncs the data from the football API to our database
+builder.Services.AddScoped<FootballSyncService>();
+
+//start the background worker
+builder.Services.AddHostedService<FootballSyncBackgroundService>();
+
 
 var app = builder.Build();
 
