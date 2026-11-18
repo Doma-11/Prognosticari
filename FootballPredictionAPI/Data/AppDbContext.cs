@@ -133,6 +133,10 @@ namespace FootballPredictionAPI.Data
                 .IsUnique();
 
 
+            modelBuilder.Entity<Season>()
+                .HasIndex(s => s.ExternalApiId)
+                .IsUnique();
+
             //google
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.GoogleId)

@@ -145,6 +145,9 @@ namespace FootballPredictionAPI.Migrations
                     b.Property<DateOnly>("EndDate")
                         .HasColumnType("date");
 
+                    b.Property<int?>("ExternalApiId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("LeagueId")
                         .HasColumnType("integer");
 
@@ -156,6 +159,9 @@ namespace FootballPredictionAPI.Migrations
                         .HasColumnType("date");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExternalApiId")
+                        .IsUnique();
 
                     b.HasIndex("LeagueId", "Name")
                         .IsUnique();

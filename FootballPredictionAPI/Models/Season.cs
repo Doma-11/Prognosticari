@@ -12,6 +12,8 @@
 
         public League League { get; set; } = null!;
 
+        public int? ExternalApiId { get; set; }
+
         public ICollection<Match> Matches { get; set; } = new List<Match>();
 
         public ICollection<Tournament> Tournaments { get; set; } = new List<Tournament>();
