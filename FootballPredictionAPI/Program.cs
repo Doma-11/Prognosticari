@@ -28,6 +28,9 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 //TOURNAMENT SERVICE
 builder.Services.AddScoped<ITournamentService, TournamentService>();
 
+//PREDICTION SERVICE
+builder.Services.AddScoped<IPredictionService, PredictionService>();
+
 //PASSWORD HASHER SERVICE REGISTRATION
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
